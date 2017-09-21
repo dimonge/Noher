@@ -29,11 +29,11 @@ const hmkit = new HMKit(
 
 // PASTE CLIENT CERTIFICATE SNIPPET HERE
 
-const hmkit = new HMKit(
+/*const hmkit = new HMKit(
     "dGVzdP910yYW6M2mtioAlDzaYwwsEFiWl2kXxRpjzpgfz1G3Exlroo8ZeBGP2mcIwDx86yWoWiVOU5qy5EN4UQuw/qRLPY3OS+VZO8OwkMLCh9asQd0xPzw/4f/wqKNtIm1CAZJEWzI7FSWW43uL2ovWkMd+cDNYwyMD4crccATXB9A98tTp8bLfsLrarJ6EzNe/sR/CxpXS", 
     "DQJSJHHlphXhCJNcmwKjQ+tyBKEIh24elts0dSr4dGY="
 );
-
+*/
 async function app() {
   /*
 
@@ -63,17 +63,21 @@ async function app() {
    */
 
   const accessCertificate = await hmkit.downloadAccessCertificate(
-    "UMIDsbq5rWcbEk0MNV8ZJioHws6xuLfWJycoeFR5nvBAAReIWHCv5_73nWEyWYxLAfwxXcxvqWXO_mxNvDh0DAG_-MBTObw3rx83pSP6TCBBFZHBaZzFTfPxei35x53NuA"
+    "t5B5PQ0CyW1qTA30c-hynY8jpOT5-yigm8By0gbLG2q19Fy8kFmIaAIo7Zew8uW2m9985EoiI1CTJr6nU95flpbnrqWmWVJXsyjkvDLDbIKpFgoBatmjotIc6JVtH-04ig"
   );
 
-  const response = await hmkit.telematics.sendCommand(
+  const startTheEngine = await hmkit.telematics.sendCommand(
     accessCertificate.getVehicleSerial(),
-    hmkit.commands.EngineCommand.turnOn()
+    hmkit.commands.EngineCommand.turnOff()
   );
 
-  console.log(response.bytes());
-  console.log(response.parse());
+  console.log(startTheEngine.bytes());
+  console.log(startTheEngine.parse());
 }
 
 // Run your app
-app();
+
+/**
+ *  using restify, nodejs and restify to create a api to 
+ *    make car changes and collect data from the car.
+ */ 

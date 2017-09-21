@@ -3,3 +3,4 @@ yarn.lock
 /lib
 package-lock.json
 .editorconfig
+.DS_Store
