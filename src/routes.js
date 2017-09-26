@@ -3,8 +3,8 @@
 module.exports = (ctx) => {
   const db = ctx.db;
   const server = ctx.server;
-  const commandAccessCertificate = ctx.app; // return an promise
-  console.log(commandAccessCertificate())
+  const commandAccessCertificate = ctx.getVehicleSerial; // return an promise
+  console.log('commandAccessCertificate', commandAccessCertificate)
   // list of commands executed and the response for the car
   const collection = db.collection('command');
   /**

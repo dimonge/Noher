@@ -18,17 +18,11 @@ const server = restify.createServer({
   version: config.version
 });
 
-
 server.use(restify.plugins.bodyParser({mapParams: true}));
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser({mapParams: true}));
 server.use(restify.plugins.fullResponse());
-//server.use(registerCertificate())
-/*server.use(function(req, res, next) {
-  console.log('logger....');
-  console.log(req, res)
-  return next();
-});*/
+
 async function app() {
 
   const hmkit = new HMKit(
@@ -39,17 +33,17 @@ async function app() {
   const accessCertificate = await hmkit.downloadAccessCertificate(
     "t5B5PQ0CyW1qTA30c-hynY8jpOT5-yigm8By0gbLG2q19Fy8kFmIaAIo7Zew8uW2m9985EoiI1CTJr6nU95flpbnrqWmWVJXsyjkvDLDbIKpFgoBatmjotIc6JVtH-04ig"
   );
-  
+
   console.log('Engine starting...')
   const startTheEngine = await hmkit.telematics.sendCommand(
     accessCertificate.getVehicleSerial(),
-    //hmkit.commands.EngineCommand.turnOn()
-    hmkit.commands.FuelingCommand.openGasFlap()
+    hmkit.commands.EngineCommand.turnOn()
+    //hmkit.commands.FuelingCommand.openGasFlap()
   );
   console.log(startTheEngine.bytes());
   console.log(startTheEngine.parse());
   console.log('Engine started...')
-  return {accessCertificate: accessCertificate, hmkit: hmkit}  ;
+  return accessCertificate.getVehicleSerial();
 }
 server.listen(config.port, () => {  
   
@@ -65,7 +59,19 @@ server.listen(config.port, () => {
       config.port,
       config.env
     )
+
+    let getVehicleSerial = '';
+    app().then(key => {
+      getVehicleSerial = key;
+      //db.createCollection("serial");
+      
+      db.getCollection('serial').insertOne({key});
+    })
+    console.log(db)
+
     
-    require('./routes')({ db, server, app});
+    
+    
+    require('./routes')({ db, server, getVehicleSerial});
   });
 });
