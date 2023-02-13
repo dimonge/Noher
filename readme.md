@@ -3,8 +3,7 @@
 - This was an experimental prototype used to test [High mobility API](https://www.high-mobility.com) data.
 
 ## Tools
-- Javascript
-- NodeJs
+- Node
 - High Mobility API
 
 
