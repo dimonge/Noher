@@ -62,9 +62,7 @@ async function app() {
 
    */
 
-  const accessCertificate = await hmkit.downloadAccessCertificate(
-    "t5B5PQ0CyW1qTA30c-hynY8jpOT5-yigm8By0gbLG2q19Fy8kFmIaAIo7Zew8uW2m9985EoiI1CTJr6nU95flpbnrqWmWVJXsyjkvDLDbIKpFgoBatmjotIc6JVtH-04ig"
-  );
+  const accessCertificate = await hmkit.downloadAccessCertificate(process.env.DOWNLOAD_ACCESS_CERTIFICATE);
 
   const startTheEngine = await hmkit.telematics.sendCommand(
     accessCertificate.getVehicleSerial(),

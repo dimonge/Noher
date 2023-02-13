@@ -6,6 +6,6 @@ module.exports = {
   env: process.env.NODE_ENV || 'development',
   port: process.env.PORT || 3000,
   db: {
-    uri: 'mongodb://peter:peter@ds149954.mlab.com:49954/noher'
+    uri: process.env.DB_ENVIRONMENT || 'mongodb://localhost:27017/noher',
   }
 }
