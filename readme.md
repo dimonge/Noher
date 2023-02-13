@@ -1,6 +1,6 @@
 # Car diagnostic Prototype 
 
-- This was an experimental prototype used to test (https://www.high-mobility.com/)[High mobility API] data.
+- This was an experimental prototype used to test [High mobility API](https://www.high-mobility.com) data.
 
 ## Tools
 - Javascript
